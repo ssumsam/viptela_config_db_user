@@ -37,4 +37,4 @@ python update_db_user.py vmanage_1 vmanage_2 vmanage_3
 ```$ python update_db_user.py testvmanage01
 ^^^^^^^^^^
 ['Successfully updated configuration database admin user\r\r\nSuccessfully restarted NMS application server\r\r\ntestvmanage01']
-^^^^^^^^^^
+^^^^^^^^^^```
