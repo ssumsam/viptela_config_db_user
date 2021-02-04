@@ -4,7 +4,7 @@ This is a Python script to update the config-db user and password for one or mor
 ### CLI-equivalent command
 request nms configuration-db update-admin-user 
 
->Enter current user name:*****
+>Enter current user name:*****</br>
 >Enter current user password:******
 >Enter new user name:*****
 >Enter new user password:******
