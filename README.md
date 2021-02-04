@@ -16,12 +16,6 @@ The script assumes the following:</br>
 2. All input vManages are to use the same configuration-db admin user and password.</br>
 
 
-## REQUIREMENTS
-pip install pexpect</br>
-pip install os</br>
-pip install sys</br>
-pip install pprint</br>
-
 ## SET ENV VARIABLES
 export VMANAGE_USER='*******'</br>
 export VMANAGE_PASSWORD='*******'</br>
@@ -31,10 +25,13 @@ export OLD_DB_PASSWORD='********'</br>
 export NEW_DB_PASSWORD='*********'</br>
 
 ## HOW TO USE
-From Python shell</br>
+
+pip install -r requirements.txt
 python update_db_user.py vmanage_1 vmanage_2 vmanage_3
 
-```$ python update_db_user.py testvmanage01
+```
+$ python update_db_user.py testvmanage01
 ^^^^^^^^^^
 ['Successfully updated configuration database admin user\r\r\nSuccessfully restarted NMS application server\r\r\ntestvmanage01']
-^^^^^^^^^^```
+^^^^^^^^^^
+```
