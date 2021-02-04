@@ -26,7 +26,7 @@ export NEW_DB_PASSWORD='*********'</br>
 
 ## HOW TO USE
 
-pip install -r requirements.txt
+pip install -r requirements.txt<br>
 python update_db_user.py vmanage_1 vmanage_2 vmanage_3
 
 ```
