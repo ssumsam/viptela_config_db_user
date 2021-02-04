@@ -32,4 +32,4 @@ export NEW_DB_PASSWORD='*********'</br>
 
 ## HOW TO USE
 From Python shell</br>
-python update_db_user.py <vmanage1> <vmanage2> <vmanage3>
+python update_db_user.py vmanage_1 vmanage_2 vmanage_3
