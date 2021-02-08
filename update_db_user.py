@@ -34,13 +34,13 @@ def main():
             output_dict[host] = 'Unable to connect to {}'.format(host)
             child.close()
             continue
-	# if 'assword' in child.after
-        child.sendline(vmanage_password)
-        child.expect([_VMANAGE_PROMPT, 'assword'])
-        if not child.after == _VMANAGE_PROMPT:
-            output_dict[host] = 'Unable to log on {} - please check credentials'.format(host)
-            child.close()
-            continue
+	if child.after == _PASSWORD_COLON_STRING:
+            child.sendline(vmanage_password)
+            child.expect([_PASSWORD_COLON_STRING, _VMANAGE_PROMPT])
+            if not child.after == _VMANAGE_PROMPT:
+                output_dict[host] = 'Unable to log on {} - please check credentials'.format(host)
+                child.close()
+                continue
         # VMANAGE_PROMPT has been found.
         child.sendline('request nms configuration-db update-admin-user')
         child.expect(_NAME_COLON_STRING)
