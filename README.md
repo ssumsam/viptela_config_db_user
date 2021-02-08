@@ -17,12 +17,14 @@ The script assumes the following:</br>
 
 
 ## SET ENV VARIABLES
-export VMANAGE_USER='*******'</br>
-export VMANAGE_PASSWORD='*******'</br>
-export OLD_DB_USER='*********'</br>
-export NEW_DB_USER='********'</br>
-export OLD_DB_PASSWORD='********'</br>
-export NEW_DB_PASSWORD='*********'</br>
+```
+export VMANAGE_USER='*******'
+export VMANAGE_PASSWORD='*******'
+export OLD_DB_USER='*********'
+export NEW_DB_USER='********'
+export OLD_DB_PASSWORD='********'
+export NEW_DB_PASSWORD='*********'
+```
 
 ## HOW TO USE
 
