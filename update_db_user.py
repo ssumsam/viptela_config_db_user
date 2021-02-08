@@ -1,7 +1,6 @@
 import sys
 import pexpect
 from os import environ
-from pprint import pprint
 
 
 _VMANAGE_PROMPT = '#'
@@ -10,11 +9,10 @@ _PASSWORD_COLON_STRING = 'assword:'
 
 
 def main():
-    output = []
     vmanage_list = set(sys.argv[1:])
     if not vmanage_list:
         print('ERROR - No input devices!!!')
-        return output
+        return
     try:
         vmanage_user = environ['VMANAGE_USER']
         vmanage_password = environ['VMANAGE_PASSWORD']
@@ -23,24 +21,24 @@ def main():
         old_db_password = environ['OLD_DB_PASSWORD']
         new_db_password = environ['NEW_DB_PASSWORD']
     except KeyError:
-        output.append('Missing one or more mandatory environment variables')
-        print(output)
-        return output
-    output = []
+        print('Missing one or more mandatory environment variables')
+        return 
+
+    output_dict = {}
 
     for host in vmanage_list:
         child = pexpect.spawn('ssh {}@{}'.format(vmanage_user, host))
         try:
-            child.expect([_PASSWORD_COLON_STRING])
+            child.expect([_PASSWORD_COLON_STRING, _VMANAGE_PROMPT])
         except (pexpect.EOF, pexpect.TIMEOUT):
-            output.append('Unable to connect to {}'.format(host))
+            output_dict[host] = 'Unable to connect to {}'.format(host)
             child.close()
             continue
 	# if 'assword' in child.after
         child.sendline(vmanage_password)
         child.expect([_VMANAGE_PROMPT, 'assword'])
         if not child.after == _VMANAGE_PROMPT:
-            output.append('Unable to log on to {} - please check credentials'.format(host))
+            output_dict[host] = 'Unable to log on {} - please check credentials'.format(host)
             child.close()
             continue
         # VMANAGE_PROMPT has been found.
@@ -55,13 +53,14 @@ def main():
         child.sendline(new_db_password)
         child.expect(_VMANAGE_PROMPT)
         if child.after == _VMANAGE_PROMPT:
-            output.append(child.before)
+            output_dict[host] = child.before 
             child.close()
             continue
-    print('^' * 10)
-    pprint(output)
-    print('^' * 10)
-    return output
+    for host, host_output in output_dict.items():
+        print('*** {} ***'.format(host))
+        for line in host_output.splitlines():
+            print(line)
+    return
 
 if __name__ == "__main__":
     main()
