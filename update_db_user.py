@@ -56,6 +56,7 @@ def main():
             output_dict[host] = child.before 
             child.close()
             continue
+
     for host, host_output in output_dict.items():
         print('*** {} ***'.format(host))
         for line in host_output.splitlines():
