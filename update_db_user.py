@@ -57,6 +57,7 @@ def main():
         child.sendline(new_db_user)
         child.expect(_PASSWORD_COLON_STRING)
         child.sendline(new_db_password)
+	time.sleep(5)
         child.expect(_VMANAGE_PROMPT)
         if child.after == _VMANAGE_PROMPT:
             output_dict[host] = child.before 
