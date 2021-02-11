@@ -7,6 +7,7 @@ from os import environ
 _VMANAGE_PROMPT = '#'
 _NAME_COLON_STRING = 'name:'
 _PASSWORD_COLON_STRING = 'assword:'
+_CONFIG_COMMAND = 'request nms configuration-db update-admin-user'
 
 
 def main():
@@ -43,10 +44,10 @@ def main():
                 child.close()
                 continue
         # VMANAGE_PROMPT has been found.
-        child.sendline('request nms configuration-db update-admin-user')
+        child.sendline(_CONFIG_COMMAND)
         child.expect([_NAME_COLON_STRING, _VMANAGE_PROMPT])
         if child.after == _VMANAGE_PROMPT:
-            output_dict[host] = 'The command "request nms configuration-db update-admin-user" is not supported' 
+            output_dict[host] = 'The command "{}" is not supported'.format(_CONFIG_COMMAND) 
             child.close()
             continue
         child.sendline(old_db_user)
@@ -56,7 +57,6 @@ def main():
         child.sendline(new_db_user)
         child.expect(_PASSWORD_COLON_STRING)
         child.sendline(new_db_password)
-        time.sleep(5)
         child.expect(_VMANAGE_PROMPT)
         if child.after == _VMANAGE_PROMPT:
             output_dict[host] = child.before 
